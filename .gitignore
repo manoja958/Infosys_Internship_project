@@ -1,0 +1,24 @@
+# =========================
+# Backend (Spring Boot)
+# =========================
+demo/target/
+demo/.mvn/
+*.log
+
+# =========================
+# Frontend (React)
+# =========================
+frontend/node_modules/
+frontend/build/
+
+# =========================
+# IDE files
+# =========================
+.idea/
+.vscode/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
