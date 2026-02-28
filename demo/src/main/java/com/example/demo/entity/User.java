@@ -7,10 +7,25 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users")
 public class User {
+    private boolean firstLogin = true;
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
+    }
+    /* =====================================
+       PRIMARY KEY
+    ===================================== */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    /* =====================================
+       BASIC USER INFORMATION
+    ===================================== */
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -22,22 +37,46 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private String role;
+    private String role; // ADMIN or USER
 
-    private int failedAttempts;
+    /* =====================================
+       SECURITY FIELDS
+    ===================================== */
 
-    private boolean accountLocked;
+    // Number of failed login attempts
+    @Column(nullable = false)
+    private int failedAttempts = 0;
 
+    // Indicates whether account is locked
+    @Column(nullable = false)
+    private boolean accountLocked = false;
+
+    /*
+        Lock logic:
+        ---------------------------------------
+        lockTime != null  → locked due to failed attempts
+        lockTime == null  → manually locked by admin
+    */
     private LocalDateTime lockTime;
+
+    /* =====================================
+       PASSWORD RESET FIELDS
+    ===================================== */
 
     private String resetToken;
 
     private LocalDateTime tokenExpiry;
 
-    // ===== GETTERS & SETTERS =====
+    /* =====================================
+       GETTERS & SETTERS
+    ===================================== */
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {   // optional, usually not needed
+        this.id = id;
     }
 
     public String getUsername() {
@@ -48,10 +87,6 @@ public class User {
         this.username = username;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -59,7 +94,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public String getPassword() {
         return password;
@@ -69,7 +103,6 @@ public class User {
         this.password = password;
     }
 
-
     public String getRole() {
         return role;
     }
@@ -77,7 +110,6 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-
 
     public int getFailedAttempts() {
         return failedAttempts;
@@ -87,7 +119,6 @@ public class User {
         this.failedAttempts = failedAttempts;
     }
 
-
     public boolean isAccountLocked() {
         return accountLocked;
     }
@@ -95,7 +126,6 @@ public class User {
     public void setAccountLocked(boolean accountLocked) {
         this.accountLocked = accountLocked;
     }
-
 
     public LocalDateTime getLockTime() {
         return lockTime;
@@ -105,7 +135,6 @@ public class User {
         this.lockTime = lockTime;
     }
 
-
     public String getResetToken() {
         return resetToken;
     }
@@ -113,7 +142,6 @@ public class User {
     public void setResetToken(String resetToken) {
         this.resetToken = resetToken;
     }
-
 
     public LocalDateTime getTokenExpiry() {
         return tokenExpiry;
@@ -127,6 +155,7 @@ public class User {
 
 
 
+//
 //package com.example.demo.entity;
 //
 //import jakarta.persistence.*;
@@ -140,47 +169,90 @@ public class User {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 //
-//    @Column(unique = true)
+//    @Column(unique = true, nullable = false)
 //    private String username;
 //
-//    @Column(unique = true)
+//    @Column(unique = true, nullable = false)
 //    private String email;
 //
+//    @Column(nullable = false)
 //    private String password;
+//
+//    @Column(nullable = false)
 //    private String role;
 //
 //    private int failedAttempts;
-//    private boolean accountLocked;
+//
+//    private boolean accountLocked=false;
+//
+//    private LocalDateTime lockTime;
 //
 //    private String resetToken;
+//
 //    private LocalDateTime tokenExpiry;
-//    private LocalDateTime lockTime;   // ADD THIS
 //
-//    public Long getId() { return id; }
+//    // ===== GETTERS & SETTERS =====
 //
-//    public String getUsername() { return username; }
-//    public void setUsername(String username) { this.username = username; }
+//    public Long getId() {
+//        return id;
+//    }
 //
-//    public String getEmail() { return email; }
-//    public void setEmail(String email) { this.email = email; }
+//    public String getUsername() {
+//        return username;
+//    }
 //
-//    public String getPassword() { return password; }
-//    public void setPassword(String password) { this.password = password; }
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 //
-//    public String getRole() { return role; }
-//    public void setRole(String role) { this.role = role; }
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 //
-//    public int getFailedAttempts() { return failedAttempts; }
-//    public void setFailedAttempts(int failedAttempts) { this.failedAttempts = failedAttempts; }
+//    public String getEmail() {
+//        return email;
+//    }
 //
-//    public boolean isAccountLocked() { return accountLocked; }
-//    public void setAccountLocked(boolean accountLocked) { this.accountLocked = accountLocked; }
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 //
-//    public String getResetToken() { return resetToken; }
-//    public void setResetToken(String resetToken) { this.resetToken = resetToken; }
 //
-//    public LocalDateTime getTokenExpiry() { return tokenExpiry; }
-//    public void setTokenExpiry(LocalDateTime tokenExpiry) { this.tokenExpiry = tokenExpiry; }
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
+//
+//
+//    public int getFailedAttempts() {
+//        return failedAttempts;
+//    }
+//
+//    public void setFailedAttempts(int failedAttempts) {
+//        this.failedAttempts = failedAttempts;
+//    }
+//
+//
+//    public boolean isAccountLocked() {
+//        return accountLocked;
+//    }
+//
+//    public void setAccountLocked(boolean accountLocked) {
+//        this.accountLocked = accountLocked;
+//    }
+//
 //
 //    public LocalDateTime getLockTime() {
 //        return lockTime;
@@ -190,4 +262,23 @@ public class User {
 //        this.lockTime = lockTime;
 //    }
 //
+//
+//    public String getResetToken() {
+//        return resetToken;
+//    }
+//
+//    public void setResetToken(String resetToken) {
+//        this.resetToken = resetToken;
+//    }
+//
+//
+//    public LocalDateTime getTokenExpiry() {
+//        return tokenExpiry;
+//    }
+//
+//    public void setTokenExpiry(LocalDateTime tokenExpiry) {
+//        this.tokenExpiry = tokenExpiry;
+//    }
 //}
+//
+

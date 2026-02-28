@@ -1,33 +1,34 @@
 package com.example.demo.controller;
+import com.example.demo.entity.UserRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-
 import com.example.demo.entity.User;
 import com.example.demo.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+
 @CrossOrigin("*")
 public class AuthController {
 
     @Autowired
     private AuthService authService;
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody User user) {
-
-        String result = authService.signup(user);
-
-        if (!result.equals("Signup successful")) {
-            return ResponseEntity.badRequest().body(result);
-        }
-
-        return ResponseEntity.ok(result);
-    }
+    //@PostMapping("/signup")
+//    public ResponseEntity<?> signup(@RequestBody User user) {
+//
+//        String result = authService.signup(user);
+//
+//        if (!result.equals("Signup successful")) {
+//            return ResponseEntity.badRequest().body(result);
+//        }
+//
+//        return ResponseEntity.ok(result);
+//    }
 
 //    @PostMapping("/login")
 //    public ResponseEntity<?> login(@RequestBody Map<String,String> data) {
@@ -44,6 +45,29 @@ public class AuthController {
 //        return ResponseEntity.ok(Map.of("token", result));
 //    }
 
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody Map<String,String> data) {
+//
+//        String result = authService.login(
+//                data.get("username"),
+//                data.get("password"));
+//
+//        if (result == null || result.split("\\.").length != 3) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+//                    .body(Map.of("error", result));
+//        }
+//
+//        return ResponseEntity.ok(Map.of("token", result));
+//    }
+@PostMapping("/admin-signup")
+public String adminSignup(@RequestBody User user) {
+
+    if (!user.getRole().equalsIgnoreCase("ADMIN")) {
+        return "Only ADMIN account can be created";
+    }
+
+    return authService.signup(user);
+}
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String,String> data) {
 
@@ -58,7 +82,6 @@ public class AuthController {
 
         return ResponseEntity.ok(Map.of("token", result));
     }
-
 //    @PostMapping("/login")
 //    public String login(@RequestBody Map<String,String> data) {
 //        return authService.login(
@@ -86,7 +109,9 @@ public ResponseEntity<?> reset(@RequestBody Map<String, String> data) {
     if (!result.equals("Password reset successful")) {
         return ResponseEntity.badRequest().body(result);
     }
-
+    if (result == null || result.split("\\.").length != 3) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
+    }
     return ResponseEntity.ok(result);
 }
 
@@ -107,6 +132,26 @@ public ResponseEntity<?> reset(@RequestBody Map<String, String> data) {
                 "lockedUsers", authService.getLockedUsers()
         );
     }
-
-
+    @PostMapping("/request")
+    public String sendRequest(@RequestBody UserRequest request) {
+        return authService.sendUserRequest(request);
+    }
+    @PostMapping("/request-user")
+    public String requestUser(@RequestBody UserRequest request) {
+        return authService.sendUserRequest(request);
+    }
+//    @GetMapping("/pending-requests")
+//    public List<UserRequest> pendingRequests() {
+//        return authService.getPendingRequests();
+//    }
+//
+//    @PostMapping("/approve/{id}")
+//    public String approve(@PathVariable Long id)
+//    {
+//        return authService.approveRequest(id);
+//    }
+    @DeleteMapping("/delete-user")
+    public String deleteUser(@RequestParam String username) {
+        return authService.deleteUser(username);
+    }
 }
