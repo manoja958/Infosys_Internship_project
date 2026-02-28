@@ -1,0 +1,372 @@
+/* ========================= */
+/* GLOBAL RESET */
+/* ========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  overflow: hidden;   /* Prevent page scroll */
+  background: #f4f6f9;
+}
+
+/* ========================= */
+/* AUTH PAGES */
+/* ========================= */
+
+.auth-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.login-card {
+  width: 380px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ========================= */
+/* ADMIN LAYOUT */
+/* ========================= */
+
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 240px;
+  background: #1e293b;
+  color: white;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  margin-bottom: 30px;
+}
+
+.sidebar p {
+  margin: 15px 0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sidebar p:hover {
+  color: #38bdf8;
+}
+
+.sidebar button {
+  margin-top: auto;
+  padding: 10px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ========================= */
+/* MAIN CONTENT */
+/* ========================= */
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;    /* Only content scrolls */
+  background: #f4f6f9;
+}
+
+/* ========================= */
+/* DASHBOARD CARDS */
+/* ========================= */
+
+.cards {
+  display: flex;
+  gap: 30px;
+  margin-top: 25px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  flex: 1;
+  font-weight: 600;
+  font-size: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* ========================= */
+/* TABLE STYLE */
+/* ========================= */
+
+table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table th {
+  background: #334155;
+  color: white;
+  padding: 14px;
+}
+
+table td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+/* ========================= */
+/* BUTTON STYLE */
+/* ========================= */
+
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:first-of-type {
+  background: #22c55e;
+  color: white;
+}
+
+button:last-of-type {
+  background: #ef4444;
+  color: white;
+}
+
+/* ========================= */
+/* STOCK COLORS */
+/* ========================= */
+
+.low-stock {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.in-stock {
+  color: #10b981;
+  font-weight: bold;
+}
+
+/* ========================= */
+/* ANIMATION */
+/* ========================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.product-form,
+.edit-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.product-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.product-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.product-form input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.product-table th,
+.product-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.low-stock {
+  color: red;
+  font-weight: bold;
+}
+
+.in-stock {
+  color: green;
+  font-weight: bold;
+}
+
+.low-row {
+  background-color: #ffe5e5;
+}
+
+.add-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.search-input {
+  width: 300px;
+  padding: 8px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.lock-btn {
+  background: #f59e0b;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.unlock-btn {
+  background: #10b981;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.search-input {
+  width: 300px;
+  padding: 8px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.lock-btn {
+  background: #f59e0b;
+  color: white;
+  padding: 6px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.unlock-btn {
+  background: #10b981;
+  color: white;
+  padding: 6px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.admin-badge {
+  background: #2563eb;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.user-badge {
+  background: #10b981;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.locked-status {
+  color: red;
+  font-weight: bold;
+}
+
+.active-status {
+  color: green;
+  font-weight: bold;
+}
+/* .login-card {
+  width: 350px;
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+} */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
