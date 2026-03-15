@@ -121,6 +121,7 @@ public class SecurityConfig {
                                     .requestMatchers("/product/all").authenticated()
                                     .requestMatchers("/product/low-stock").hasRole("ADMIN")
 
+                                    .requestMatchers("/reports/**").hasRole("ADMIN")
                                     .anyRequest().authenticated();
                         }
                 )

@@ -1,4 +1,6 @@
-/* ========================= */
+
+
+
 /* GLOBAL RESET */
 /* ========================= */
 
@@ -11,7 +13,7 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   height: 100vh;
-  overflow: hidden;   /* Prevent page scroll */
+  overflow: hidden;   
   background: #f4f6f9;
 }
 
@@ -369,4 +371,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.card {
+  flex: 1;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
 }

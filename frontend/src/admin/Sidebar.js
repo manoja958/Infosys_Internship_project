@@ -10,7 +10,9 @@ function Sidebar({ setActiveSection, logout }) {
       <p onClick={() => setActiveSection("users")}>Users</p>
       <p onClick={() => setActiveSection("products")}>Products</p>
      <p onClick={() => setActiveSection("userRequests")}>User Requests</p>
-<p onClick={() => setActiveSection("stockRequests")}>Stock Requests</p>
+      <p onClick={() => setActiveSection("stockRequests")}>Stock Requests</p>
+         <p onClick={() => setActiveSection("alerts")}> Alerts</p>
+         <p onClick={()=> setActiveSection("reports")}> Reports</p>
           <p onClick={() => setActiveSection("audit")}>Audit</p>
 
       <button onClick={logout}>Logout</button>

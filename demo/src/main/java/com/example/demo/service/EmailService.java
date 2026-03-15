@@ -79,4 +79,18 @@ public class EmailService {
 
         mailSender.send(message);
     }
+    public void sendLowStockEmail(String productName, int quantity) {
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo("youradminemail@gmail.com");   // Put admin email here
+        message.setSubject("⚠ LOW STOCK ALERT - Inventory System");
+
+        message.setText(
+                "Product: " + productName +
+                        "\nCurrent Stock: " + quantity +
+                        "\n\nStock is below minimum level. Please restock immediately."
+        );
+
+        mailSender.send(message);
+    }
 }

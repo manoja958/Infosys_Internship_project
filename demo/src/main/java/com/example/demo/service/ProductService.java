@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 @Service
 public class ProductService {
     @Autowired
+    private AlertService alertService;
+    @Autowired
     private StockRequestRepository stockRequestRepo;
     @Autowired
     private ProductRepository productRepo;
@@ -30,6 +32,7 @@ private long productId;
         product.setStatus("ACTIVE");
 
         productRepo.save(product);
+        alertService.evaluateStockAlert(product);
         auditService.logAction(
                 "PRODUCT_ADDED",
                 "ADMIN",
@@ -51,7 +54,7 @@ private long productId;
         product.setStockQuantity(product.getStockQuantity() + quantity);
 
         productRepo.save(product);
-
+        alertService.evaluateStockAlert(product);
         return "Stock updated successfully";
     }
 
@@ -67,7 +70,7 @@ private long productId;
         product.setStockQuantity(product.getStockQuantity() - quantity);
 
         productRepo.save(product);
-
+        alertService.evaluateStockAlert(product);
         return "Stock updated successfully";
     }
     public List<Product> getAllProducts() {
@@ -153,7 +156,7 @@ private long productId;
         );
 
         productRepo.save(product);
-
+        alertService.evaluateStockAlert(product);
         request.setStatus("APPROVED");
         stockRequestRepo.save(request);
         auditService.logAction("STOCK_APPROVED", "ADMIN", request.getProductName());

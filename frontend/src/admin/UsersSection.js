@@ -139,7 +139,7 @@ function UsersSection({ users, fetchData, token }) {
 
       {/* 🔍 SEARCH */}
       <input
-        type="text"
+           type="text"
         placeholder="Search by username or email..."
         className="search-input"
         value={searchTerm}

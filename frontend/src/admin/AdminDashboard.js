@@ -3,6 +3,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import AlertsSection from "./AlertsSection";
 import Sidebar from "./Sidebar";
 import DashboardHome from "./DashBoardHome";
 import UsersSection from "./UsersSection";
@@ -10,6 +11,7 @@ import ProductsSection from "./ProductsSection";
 import UserRequestsSection from "./UserRequestsSection";
 import StockRequestsSection from "./StockRequestsSection";
 import AuditSection from "./AuditSection";
+import ReportsSection from "./ReportsSection";
 
 function AdminDashboard() {
 
@@ -162,6 +164,12 @@ function AdminDashboard() {
           />
         }
 
+        {activeSection === "alerts" &&
+  <AlertsSection token={token} />
+}
+{activeSection === "reports" &&
+  <ReportsSection token={token} />
+}
         {activeSection === "audit" &&
           <AuditSection auditLogs={auditLogs} />
         }

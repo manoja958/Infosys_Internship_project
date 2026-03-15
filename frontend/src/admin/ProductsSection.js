@@ -135,6 +135,7 @@ function ProductsSection({ products, fetchData, token }) {
 
         <input
           type="text"
+           className="search-input"
           placeholder="Search product..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -142,6 +143,7 @@ function ProductsSection({ products, fetchData, token }) {
 
         <input
           type="text"
+           className="search-input"
           placeholder="Filter by category"
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
